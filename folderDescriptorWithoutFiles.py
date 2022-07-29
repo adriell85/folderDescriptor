@@ -5,7 +5,7 @@ from natsort import natsorted
 path = '/home/prf-05/Documentos/folderDecriptor/TestPath/'
 
 splitSep = '/'
-f = open("mavicIdd.txt", "w")
+f = open("mavicIdd.csv", "w")
 spc = '  '
 matrix = []
 
@@ -64,7 +64,6 @@ for i in matrix_badPart:
 
 for mat in matrix_converted:
     print(*mat, sep='    ', file=f)
-    print('\n')
 f.close()
 
 print('DONE!!!')
