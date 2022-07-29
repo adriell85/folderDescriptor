@@ -1,11 +1,9 @@
 import glob
 import numpy as np
 from natsort import natsorted
-# from termcolor import colored
-# from cv2 import split
 
 path = '/home/prf-05/Documentos/folderDecriptor/TestPath/'
-# path_calib = '/home/prf-05/Documentos/folder test/'
+
 splitSep = '/'
 f = open("mavicIdd.txt", "w")
 spc = '  '
@@ -13,15 +11,12 @@ matrix = []
 
 for file in glob.glob(path+'**',recursive=True):
     files = file.split(splitSep)
-    # files = del files
+
     del files[0:files.index('TestPath')+1]
-    # print()
-    # if ((files[-1]).split('.'))[-1] == 'txt' or 'pptx' or  'png' or 'mp4' or 'avi' or 'mat' or 'jpeg':
-        # # print(files[-1])
-        # del files[files.index(files[-1])]
+
     files_arr = np.array(files)
     matrix.append(files_arr)
-print('fase 1')
+
 
 matrix = natsorted(matrix)
 mmm=matrix
@@ -31,9 +26,7 @@ width = 0
 count = 0
 print(matrix)
 var = True
-print('fase 2')
 while var:
-    print('f')
     for mat in matrix:
             for m in mat:
                 if len(mat)>1+count:
@@ -52,42 +45,26 @@ while var:
     if count >= len(matrix):
         var = False
 
-
-print('fase 3')
-# for mat in matrix:
-#     for m in mat:
-#         if (m.split('.'))[-1] == 'txt' or 'pptx' or  'png' or 'mp4' or 'avi' or 'mat' or 'jpeg':
-#             del matrix[:] == mat
-print('fase 4')
-aux = ' '
-
-# matrix = matrix.readlines.tolist()
-outed = []
+matrix_badPart = []
+matrix_converted = []
 for mat in matrix:
 
-    ax = mat
+    matrix_converted.append(mat.tolist())
     for m in mat:
-        # if(isinstance(mat, list) == False):
-        #     mat = mat.tolist()
-        # if(len(mat)>1):
-        #     mat.remove('')
         test = (m.split('.'))[-1]
-        if test == 'txt':
-            # outed.append(matrix[matrix.index(mat)].tolist())
-            outed.append(mat)
-            break
-    print(*mat, sep='    ', file=f)
-    # for m in mat:
-    #     if m == '':
-    #         print(aux,file=f)
-    #     else:
-    #         print(m,file=f)
-    print('\n')
+        if test == 'txt' or test == 'pptx' or test == 'png' or test == 'mp4' or test == 'avi' or test == 'mat' or test == 'jpeg' or test == 'mkv':
 
-        # aux = aux+aux
+            matrix_badPart.append(mat.tolist())
+            break
+
 print(matrix)
-for o in outed:
-    (matrix).remove(o)
-# matrix = np.subtract(matrix,outed)
+
+for i in matrix_badPart:
+    del matrix_converted[matrix_converted.index(i)]
+
+for mat in matrix_converted:
+    print(*mat, sep='    ', file=f)
+    print('\n')
 f.close()
+
 print('DONE!!!')
